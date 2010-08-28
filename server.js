@@ -3,9 +3,10 @@ require.paths.unshift("config");
 require.paths.unshift("lib");
 
 require('providers/user-mongodb');
+require('providers/twitter-mongodb');
 
-
-var connect = require('connect'),
+var sys = require('sys'),
+    connect = require('connect'),
 	form = require('connect-form'),
     assetManager = require('connect-assetmanager'),
     assetHandler = require('connect-assetmanager-handlers'),
@@ -15,6 +16,7 @@ var connect = require('connect'),
     config = require('config-dev').config,
     auth = require('connect-auth'),
     userProvider = new UserProvider(),
+    twitterProvider = new TwitterProvider(),
     authProvider = require('providers/auth-mongodb').AuthProvider;
 
 log4js.addAppender(log4js.consoleAppender());
@@ -119,7 +121,7 @@ app.dynamicHelpers({
 app.get('/', function(req, res) {
   res.render('index', {
     locals: {
-      'date': new Date().toString()
+        
     }
   });
 });
@@ -144,7 +146,20 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
+app.get("/test", function(req, res) {
+    twitterProvider.test(userProvider, function(error, result) {
+        if(error) {
+            logger.error(error.message);
+            res.redirect("/error");
+        }
+        else {
+            res.send(sys.inspect(result));
+        }
+    });
+});
+
 authProvider.addRoutes(app);
+require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
 
