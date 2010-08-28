@@ -1,9 +1,21 @@
+require.paths.unshift("/home/node/.node_libraries");
+require.paths.unshift("lib");
+require('providers/user-mongodb');
+
 var connect = require('connect'),
     assetManager = require('connect-assetmanager'),
     assetHandler = require('connect-assetmanager-handlers'),
-    express = require('express');
+    express = require('express'),
+    MemoryStore = require('connect/middleware/session/memory'),
+    log4js = require('log4js'),
+    userProvider = new UserProvider();
 
-process.title = 'node-express-boilerplate';
+log4js.addAppender(log4js.consoleAppender());
+log4js.configure("./config/log4js.js");
+
+var logger = log4js.getLogger("MAIN");
+
+process.title = 'zenith-workloom';
 process.addListener('uncaughtException', function (err, stack) {
   console.log('Caught exception: ' + err);
   console.log(err.stack.split('\n'));
@@ -119,3 +131,4 @@ app.get('/reload/', function(req, res) {
 });
 
 app.listen(3000);
+logger.info("Server started on port 3000...");
