@@ -6,3 +6,5 @@ mongodb
 connect-auth
     + http://wiki.github.com/ciaranj/connect-auth/creating-a-form-based-strategy
 connect-form
+connect-assetmanager
+connect-assetmanager-handlers
