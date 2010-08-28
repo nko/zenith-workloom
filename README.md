@@ -1,6 +1,6 @@
-# node-express-boilerplate
+# zenith-workloom
 
-A boilerplate used to quickly get minor projects going. With less configuration.
+We're just gettin' started!
 
 ## Requires
     npm install connect
