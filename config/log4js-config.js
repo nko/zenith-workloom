@@ -2,6 +2,7 @@
   "levels" : {
     "MAIN" :  "ALL",
     "ROUTES-AUTH" : "ALL",
-    "AUTH-MONGO" : "ALL"   
+    "ROUTES-USER" : "ALL",
+    "AUTH-MONGO" : "ALL"
   }
 }

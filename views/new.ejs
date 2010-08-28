@@ -1,0 +1,21 @@
+<div class="header">
+    <h1 class="h1 hd"><span class="hd-cap">Quotebook</span></h1>
+</div>
+<div class="main">
+    <div class="content">
+        <h2 class="h2 sub-hd"><span class="sub-hd-cap">Create New User</span></h2>
+        <%
+            if(error) {
+        %>
+        <p class="error">
+            <%= error %>
+        </p>
+        <%
+            }
+        %>
+        <form method="POST" action="/user/new/save">
+            <p><label>Username: <input type="text" name="username"/></label></p>
+            <p><input type="submit" value="Create New User" /></p>
+        </form>
+    </div>
+</div>

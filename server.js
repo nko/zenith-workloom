@@ -3,7 +3,7 @@ require.paths.unshift("config");
 require.paths.unshift("lib");
 
 require('providers/user-mongodb');
-require('providers/auth-mongodb');
+
 
 var connect = require('connect'),
 	form = require('connect-form'),
@@ -14,10 +14,8 @@ var connect = require('connect'),
     log4js = require('log4js'),
     config = require('config-dev').config,
     auth = require('connect-auth'),
-    loginStrategy = require('login-strategy'),
-    //github = new require('providers/github').GitHub(),
     userProvider = new UserProvider(),
-    authProvider = new AuthProvider();
+    authProvider = require('providers/auth-mongodb').AuthProvider;
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -96,7 +94,7 @@ var app = require('express').createServer(
     	form({ keepExtensions: true }),
 		connect.bodyDecoder(),
 		connect.methodOverride(),
-        auth([loginStrategy()])
+        authProvider.auths
 	);
 
 app.configure(function() {
@@ -146,8 +144,9 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
-require('routes/auth').AuthRoutes.addRoutes(app, authProvider, userProvider);
+authProvider.addRoutes(app);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
+app.set("home", "/user");
 
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
