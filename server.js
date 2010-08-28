@@ -118,11 +118,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/github', function(req, res) {
-  github.get(function(error, result) {
+  
+  github.getFollowers(function(error, result) {
     if(error) {
       logger.error(error);
     }
-    else {
+    else 
+    {
       res.render('github', {
         locals: {
           'followers': result
@@ -130,6 +132,20 @@ app.get('/github', function(req, res) {
       });
     }
   })
+  /*
+  github.getRepo(function(error, result) {
+    if(error) {
+      logger.error(error);
+    }
+    else 
+    {
+      res.render('github', {
+        locals: {
+          'repo': result
+        }
+      });
+    }
+  })*/
 });
 
 app.post('/', function(req, res) {
