@@ -1,0 +1,8 @@
+NPM SOURCED:
+
+log4js
+express
+mongodb
+connect-auth
+    + http://wiki.github.com/ciaranj/connect-auth/creating-a-form-based-strategy
+connect-form
