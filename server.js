@@ -132,5 +132,5 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
-app.listen(config.port);
-logger.info("Server started on port 3000...");
+app.listen(config.port, '0.0.0.0');
+logger.info("Server started on port " + config.port + "...");
