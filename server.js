@@ -7,7 +7,7 @@ require('providers/twitter-mongodb');
 
 var sys = require('sys'),
     connect = require('connect'),
-	form = require('connect-form'),
+    form = require('connect-form'),
     assetManager = require('connect-assetmanager'),
     assetHandler = require('connect-assetmanager-handlers'),
     express = require('express'),
@@ -126,7 +126,6 @@ app.get('/', function(req, res) {
   });
 });
 
-<<<<<<< HEAD
 app.get('/github', function(req, res) {
 /*
   github.getFollowers(function(error, result) {
@@ -160,8 +159,6 @@ app.get('/github', function(req, res) {
   })
 });
 
-=======
->>>>>>> 1f0addb19c6c768b3a0111b43c08aea274ada349
 app.post('/', function(req, res) {
   console.log(req.body);
   res.send('post');

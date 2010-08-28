@@ -1,12 +1,11 @@
-
 var config = {
-    database : {
-        host : process.env['NODE_MONGO_DRIVER_HOST'],
-        port : process.env['NODE_MONGO_DRIVER_PORT'],
-        name : process.env['NODE_MONGO_DATABASE_NAME'],
-        user : process.env['NODE_MONGO_DATABASE_USER'],
-        pass : process.env['NODE_MONGO_DATABASE_PASS']
-    },
+  database : {
+    host : process.env['NODE_MONGO_DRIVER_HOST'],
+    port : process.env['NODE_MONGO_DRIVER_PORT'],
+    name : process.env['NODE_MONGO_DATABASE_NAME'],
+    user : process.env['NODE_MONGO_DATABASE_USER'],
+    pass : process.env['NODE_MONGO_DATABASE_PASS']
+  },
   facebook : {
     id : process.env['NODE_FACEBOOK_ID'],
     secret : process.env['NODE_FACEBOOK_SECRET'],
@@ -19,10 +18,10 @@ var config = {
     responseUrl : "https://api.twitter.com/oauth/access_token"
   },
   github : {
-    key : process.env['NODE_GITHUB_KEY'],
+    login : process.env['NODE_GITHUB_LOGIN'],
     token : process.env['NODE_GITHUB_TOKEN']
   },
-    port : process.env['NODE_HTTP_PORT'] ? process.env['NODE_HTTP_PORT'] : 3000
+  port : process.env['NODE_HTTP_PORT'] ? process.env['NODE_HTTP_PORT'] : 3000
 };
 
 exports.config = config;
