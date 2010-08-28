@@ -38,3 +38,6 @@ Set up environment variables in your profile:
     export NODE_MONGO_DRIVER_PORT="27017"
     export NODE_TWITTER_KEY="xxx"
     export NODE_TWITTER_SECRET="xxx"
+    export NODE_GITHUB_LOGIN="xxx"
+    #https://github.com/account click on Account Admin in left side bar
+    export NODE_GITHUB_TOKEN="xxx"

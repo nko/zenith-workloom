@@ -114,7 +114,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/github', function(req, res) {
-  
+/*
   github.getFollowers(function(error, result) {
     if(error) {
       logger.error(error);
@@ -129,7 +129,7 @@ app.get('/github', function(req, res) {
       });
     }
   })
-  
+*/
   github.getRepo(function(error, result) {
     if(error) {
       logger.error(error);
