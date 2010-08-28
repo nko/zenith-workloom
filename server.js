@@ -6,18 +6,18 @@ require('providers/user-mongodb');
 require('providers/twitter-mongodb');
 
 var sys = require('sys'),
-    connect = require('connect'),
-	form = require('connect-form'),
-    assetManager = require('connect-assetmanager'),
-    assetHandler = require('connect-assetmanager-handlers'),
-    express = require('express'),
-    MemoryStore = require('connect/middleware/session/memory'),
-    log4js = require('log4js'),
-    config = require('config-dev').config,
-    auth = require('connect-auth'),
-    userProvider = new UserProvider(),
-    twitterProvider = new TwitterProvider(),
-    authProvider = require('providers/auth-mongodb').AuthProvider;
+  connect = require('connect'),
+  form = require('connect-form'),
+  assetManager = require('connect-assetmanager'),
+  assetHandler = require('connect-assetmanager-handlers'),
+  express = require('express'),
+  MemoryStore = require('connect/middleware/session/memory'),
+  log4js = require('log4js'),
+  config = require('config-dev').config,
+  auth = require('connect-auth'),
+  userProvider = new UserProvider(),
+  twitterProvider = new TwitterProvider(),
+  authProvider = require('providers/auth-mongodb').AuthProvider;
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -58,15 +58,15 @@ var assets = assetManager({
     ]
     , 'preManipulate': {
       /*'MSIE': [
-        assetHandler.yuiCssOptimize
-        , assetHandler.fixVendorPrefixes
-        , assetHandler.fixGradients
-        , assetHandler.stripDataUrlsPrefix
-        , assetHandler.fixFloatDoubleMargin
-      ]
-      , */
+       assetHandler.yuiCssOptimize
+       , assetHandler.fixVendorPrefixes
+       , assetHandler.fixGradients
+       , assetHandler.stripDataUrlsPrefix
+       , assetHandler.fixFloatDoubleMargin
+       ]
+       , */
       '^': [
-         assetHandler.fixVendorPrefixes
+        assetHandler.fixVendorPrefixes
         , assetHandler.fixGradients
         , assetHandler.replaceImageRefToBase64(__dirname + '/public')
       ]
@@ -86,18 +86,18 @@ var assets = assetManager({
 });
 
 var app = require('express').createServer(
-        connect.conditionalGet(),
-        connect.gzip(),
-        connect.bodyDecoder(),
-        connect.cookieDecoder(),
-        connect.logger(),
-        connect.session({ store: new MemoryStore() }),
-        connect.staticProvider(__dirname + '/public'),
-    	form({ keepExtensions: true }),
-		connect.bodyDecoder(),
-		connect.methodOverride(),
-        authProvider.auths
-	);
+  connect.conditionalGet(),
+  connect.gzip(),
+  connect.bodyDecoder(),
+  connect.cookieDecoder(),
+  connect.logger(),
+  connect.session({ store: new MemoryStore() }),
+  connect.staticProvider(__dirname + '/public'),
+  form({ keepExtensions: true }),
+  connect.bodyDecoder(),
+  connect.methodOverride(),
+  authProvider.auths
+  );
 
 app.configure(function() {
   app.set('view engine', 'ejs');
@@ -121,7 +121,7 @@ app.dynamicHelpers({
 app.get('/', function(req, res) {
   res.render('index', {
     locals: {
-        
+
     }
   });
 });
@@ -134,9 +134,9 @@ app.post('/', function(req, res) {
 var lastChangedCss = 0;
 app.get('/reload/', function(req, res) {
   var reloadCss = lastChangedCss;
-  (function reload () {
+  (function reload() {
     setTimeout(function () {
-      if ( reloadCss < lastChangedCss) {
+      if (reloadCss < lastChangedCss) {
         res.send('reload');
         reloadCss = lastChangedCss;
       } else {
@@ -147,15 +147,15 @@ app.get('/reload/', function(req, res) {
 });
 
 app.get("/test", function(req, res) {
-    twitterProvider.test(userProvider, function(error, result) {
-        if(error) {
-            logger.error(error.message);
-            res.redirect("/error");
-        }
-        else {
-            res.send(sys.inspect(result));
-        }
-    });
+  twitterProvider.test(userProvider, function(error, result) {
+    if (error) {
+      logger.error(error.message);
+      res.redirect("/error");
+    }
+    else {
+      res.send(sys.inspect(result));
+    }
+  });
 });
 
 authProvider.addRoutes(app);
