@@ -123,12 +123,13 @@ app.get('/github', function(req, res) {
     {
       res.render('github', {
         locals: {
-          'followers': result
+          'followers': result,
+          'repo', 'ha'
         }
       });
     }
   })
-  /*
+  
   github.getRepo(function(error, result) {
     if(error) {
       logger.error(error);
@@ -137,11 +138,12 @@ app.get('/github', function(req, res) {
     {
       res.render('github', {
         locals: {
+          'followers': 'ha',
           'repo': result
         }
       });
     }
-  })*/
+  })
 });
 
 app.post('/', function(req, res) {
