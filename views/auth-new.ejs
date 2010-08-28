@@ -1,17 +1,32 @@
+<%
+    function show(val) {
+        return val ? val : "";
+    }
+    user = user || {};
+    if(errors.length > 0) {
+%>
+    <ul class="errors">
+    <% for(var i = 0; i < errors.length; i++) { %>
+        <li class="error"><%=errors[i]%></li>
+    <% } %>
+    </ul>
+<%
+    }
+%>
 <form method="POST" action="/auth/new/create">
     <fieldset>
         <legend><span>Create a New User</span></legend>
         <p class="fld">
-            <label class="lbl"><span class="lbl-cap">Username</span><input type="text" name="username" id="username"/></label>
+            <label class="lbl"><span class="lbl-cap">Username</span><input type="text" name="username" id="username" value="<%= show(user.username) %>"/></label>
         </p>
         <p class="fld">
-            <label class="lbl"><span class="lbl-cap">Full Name</span><input type="text" name="fullname" id="fullname"/></label>
+            <label class="lbl"><span class="lbl-cap">Full Name</span><input type="text" name="fullname" id="fullname" value="<%= show(user.fullname) %>"/></label>
         </p>
         <p class="fld">
-            <label class="lbl"><span class="lbl-cap">Email Address</span><input type="text" name="email" id="email"/></label>
+            <label class="lbl"><span class="lbl-cap">Email Address</span><input type="text" name="email" id="email" value="<%= show(user.email) %>"/></label>
         </p>
         <p class="fld">
-            <label class="lbl"><span class="lbl-cap">Zip Code</span><input type="text" name="zip" id="zip"/></label>
+            <label class="lbl"><span class="lbl-cap">Zip Code</span><input type="text" name="zip" id="zip" value="<%= show(user.zip) %>"/></label>
         </p>
         <p class="fld">
             <label class="lbl"><span class="lbl-cap">Password</span><input type="password" name="password" id="password"/></label>

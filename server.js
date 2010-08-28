@@ -13,10 +13,11 @@ var connect = require('connect'),
     MemoryStore = require('connect/middleware/session/memory'),
     log4js = require('log4js'),
     config = require('config-dev').config,
+    auth = require('connect-auth'),
+    loginStrategy = require('login-strategy'),
     //github = new require('providers/github').GitHub(),
     userProvider = new UserProvider(),
-    authProvider = new AuthProvider()
-
+    authProvider = new AuthProvider();
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -94,7 +95,8 @@ var app = require('express').createServer(
         connect.staticProvider(__dirname + '/public'),
     	form({ keepExtensions: true }),
 		connect.bodyDecoder(),
-		connect.methodOverride()
+		connect.methodOverride(),
+        auth([loginStrategy()])
 	);
 
 app.configure(function() {
@@ -124,38 +126,6 @@ app.get('/', function(req, res) {
   });
 });
 
-/*app.get('/github', function(req, res) {
-  
-  github.getFollowers(function(error, result) {
-    if(error) {
-      logger.error(error);
-    }
-    else 
-    {
-      res.render('github', {
-        locals: {
-          'followers': result
-        }
-      });
-    }
-  })
-
-  github.getRepo(function(error, result) {
-    if(error) {
-      logger.error(error);
-    }
-    else 
-    {
-      res.render('github', {
-        locals: {
-          'repo': result
-        }
-      });
-    }
-  })
-})
-*/
-
 app.post('/', function(req, res) {
   console.log(req.body);
   res.send('post');
@@ -176,7 +146,7 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
-require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
+require('routes/auth').AuthRoutes.addRoutes(app, authProvider, userProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 
 app.listen(config.port, '0.0.0.0');

@@ -1,5 +1,7 @@
 {
   "levels" : {
-    "MAIN" :  "ALL"
+    "MAIN" :  "ALL",
+    "ROUTES-AUTH" : "ALL",
+    "AUTH-MONGO" : "ALL"   
   }
 }
