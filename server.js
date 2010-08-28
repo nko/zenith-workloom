@@ -1,7 +1,9 @@
 require.paths.unshift("/home/node/.node_libraries");
 require.paths.unshift("config");
 require.paths.unshift("lib");
+
 require('providers/user-mongodb');
+require('providers/auth-mongodb');
 
 var connect = require('connect'),
     assetManager = require('connect-assetmanager'),
@@ -11,7 +13,9 @@ var connect = require('connect'),
     log4js = require('log4js'),
     config = require('config-dev').config,
     github = new require('providers/github').GitHub(),
-    userProvider = new UserProvider();
+    userProvider = new UserProvider(),
+    authProvider = new AuthProvider()
+
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -147,6 +151,9 @@ app.get('/reload/', function(req, res) {
     }, 100);
   })();
 });
+
+require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
+require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
