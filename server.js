@@ -6,13 +6,14 @@ require('providers/user-mongodb');
 require('providers/auth-mongodb');
 
 var connect = require('connect'),
+	form = require('connect-form'),
     assetManager = require('connect-assetmanager'),
     assetHandler = require('connect-assetmanager-handlers'),
     express = require('express'),
     MemoryStore = require('connect/middleware/session/memory'),
     log4js = require('log4js'),
     config = require('config-dev').config,
-    github = new require('providers/github').GitHub(),
+    //github = new require('providers/github').GitHub(),
     userProvider = new UserProvider(),
     authProvider = new AuthProvider()
 
@@ -83,7 +84,18 @@ var assets = assetManager({
   }
 });
 
-var app = module.exports = express.createServer();
+var app = require('express').createServer(
+        connect.conditionalGet(),
+        connect.gzip(),
+        connect.bodyDecoder(),
+        connect.cookieDecoder(),
+        connect.logger(),
+        connect.session({ store: new MemoryStore() }),
+        connect.staticProvider(__dirname + '/public'),
+    	form({ keepExtensions: true }),
+		connect.bodyDecoder(),
+		connect.methodOverride()
+	);
 
 app.configure(function() {
   app.set('view engine', 'ejs');
@@ -91,12 +103,7 @@ app.configure(function() {
 });
 
 app.configure(function() {
-  app.use(connect.conditionalGet());
-  app.use(connect.gzip());
-  app.use(connect.bodyDecoder());
-  app.use(connect.logger());
   app.use(assets);
-  app.use(connect.staticProvider(__dirname + '/public'));
 });
 
 app.configure('development', function() {
@@ -117,7 +124,7 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/github', function(req, res) {
+/*app.get('/github', function(req, res) {
   
   github.getFollowers(function(error, result) {
     if(error) {
@@ -132,7 +139,7 @@ app.get('/github', function(req, res) {
       });
     }
   })
-  /*
+
   github.getRepo(function(error, result) {
     if(error) {
       logger.error(error);
@@ -145,8 +152,9 @@ app.get('/github', function(req, res) {
         }
       });
     }
-  })*/
-});
+  })
+})
+*/
 
 app.post('/', function(req, res) {
   console.log(req.body);
