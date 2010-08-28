@@ -1,3 +1,4 @@
+require.paths.unshift("/home/node/.node_libraries")
 require('./lib/providers/user-mongodb');
 
 var connect = require('connect'),
