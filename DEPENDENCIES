@@ -8,3 +8,6 @@ connect-auth
 connect-form
 connect-assetmanager
 connect-assetmanager-handlers
+
+node-twitter-oauth
+    + http://github.com/davidjrice/node-twitter-oauth

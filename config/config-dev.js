@@ -3,7 +3,9 @@ var config = {
     database : {
         host : process.env['NODE_MONGO_DRIVER_HOST'],
         port : process.env['NODE_MONGO_DRIVER_PORT'],
-        name : process.env['NODE_MONGO_DATABASE_NAME']
+        name : process.env['NODE_MONGO_DATABASE_NAME'],
+        user : process.env['NODE_MONGO_DATABASE_USER'],
+        pass : process.env['NODE_MONGO_DATABASE_PASS']
     },
   facebook : {
     id : process.env['NODE_FACEBOOK_ID'],
