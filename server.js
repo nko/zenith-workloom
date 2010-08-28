@@ -124,7 +124,7 @@ app.get('/github', function(req, res) {
       res.render('github', {
         locals: {
           'followers': result,
-          'repo', 'ha'
+          'repo': 'ha'
         }
       });
     }
