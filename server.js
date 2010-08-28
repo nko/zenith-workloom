@@ -191,7 +191,7 @@ app.get("/test", function(req, res) {
   });
 });
 
-authProvider.addRoutes(app);
+authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
