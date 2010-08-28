@@ -126,6 +126,39 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/github', function(req, res) {
+/*
+  github.getFollowers(function(error, result) {
+    if(error) {
+      logger.error(error);
+    }
+    else 
+    {
+      res.render('github', {
+        locals: {
+          'followers': result,
+          'repo': 'ha'
+        }
+      });
+    }
+  })
+*/
+  github.getRepo(function(error, result) {
+    if(error) {
+      logger.error(error);
+    }
+    else 
+    {
+      res.render('github', {
+        locals: {
+          'followers': 'ha',
+          'repo': result
+        }
+      });
+    }
+  })
+});
+
 app.post('/', function(req, res) {
   console.log(req.body);
   res.send('post');

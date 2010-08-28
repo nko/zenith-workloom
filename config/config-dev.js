@@ -17,6 +17,10 @@ var config = {
     requestUrl : "https://api.twitter.com/oauth/request_token",
     responseUrl : "https://api.twitter.com/oauth/access_token"
   },
+  github : {
+    login : process.env['NODE_GITHUB_LOGIN'],
+    token : process.env['NODE_GITHUB_TOKEN']
+  },
   port : process.env['NODE_HTTP_PORT'] ? process.env['NODE_HTTP_PORT'] : 3000
 };
 
