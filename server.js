@@ -1,4 +1,5 @@
 require.paths.unshift("/home/node/.node_libraries");
+require.paths.unshift("config");
 require.paths.unshift("lib");
 require('providers/user-mongodb');
 
@@ -8,10 +9,11 @@ var connect = require('connect'),
     express = require('express'),
     MemoryStore = require('connect/middleware/session/memory'),
     log4js = require('log4js'),
+	config = require('config-dev').config,
     userProvider = new UserProvider();
 
 log4js.addAppender(log4js.consoleAppender());
-log4js.configure("./config/log4js.js");
+log4js.configure("./config/log4js-config.js");
 
 var logger = log4js.getLogger("MAIN");
 
@@ -130,5 +132,5 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
-app.listen(3000);
+app.listen(config.port);
 logger.info("Server started on port 3000...");

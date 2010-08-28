@@ -15,7 +15,8 @@ var config = {
 		secret : process.env['NODE_TWITTER_SECRET'],
 		requestUrl : "https://api.twitter.com/oauth/request_token",
 		responseUrl : "https://api.twitter.com/oauth/access_token"
-	}
+	},
+    port : process.env['NODE_HTTP_PORT'] ? process.env['NODE_HTTP_PORT'] : 3000
 };
 
 exports.config = config;
