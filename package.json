@@ -1,8 +1,8 @@
 {
-  "name" : "node-express-boilerplate",
-  "description" : "A boilerplate used to quickly get minor projects going. With less configuration.",
+  "name" : "zenith-workloom",
+  "description" : "",
   "version" : "0.0.1",
-  "author" : "Mathias Pettersson <mape@mape.me>",
+  "author" : "Clint Andrew Hall, et. al. <clint@clintandrewhall.com>",
   "engines" : ["node"],
   "repository" : { "type":"git", "url":"http://github.com/mape/node-express-boilerplate" },
   "dependencies" : {
