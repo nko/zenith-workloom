@@ -9,7 +9,8 @@ var connect = require('connect'),
     express = require('express'),
     MemoryStore = require('connect/middleware/session/memory'),
     log4js = require('log4js'),
-	config = require('config-dev').config,
+    config = require('config-dev').config,
+    github = new require('providers/github').GitHub(),
     userProvider = new UserProvider();
 
 log4js.addAppender(log4js.consoleAppender());
@@ -110,6 +111,21 @@ app.get('/', function(req, res) {
       'date': new Date().toString()
     }
   });
+});
+
+app.get('/github', function(req, res) {
+  github.get(function(error, result) {
+    if(error) {
+      logger.error(error);
+    }
+    else {
+      res.render('github', {
+        locals: {
+          'followers': result
+        }
+      });
+    }
+  })
 });
 
 app.post('/', function(req, res) {

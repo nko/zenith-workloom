@@ -26,6 +26,7 @@ Install the following packages through npm:
 
 Install MongoDB:
     http://www.mongodb.org/downloads
+    mongod --dbpath ~/data
 
 Set up environment variables in your profile:
     # NODE SETTINGS
@@ -34,6 +35,6 @@ Set up environment variables in your profile:
     #export NODE_FACEBOOK_CALLBACK =
     export NODE_MONGO_DATABASE_NAME="node-knockout"
     export NODE_MONGO_DRIVER_HOST="localhost"
-    export NODE_MONGO_DRIVER_PORT="27079"
+    export NODE_MONGO_DRIVER_PORT="27017"
     export NODE_TWITTER_KEY="xxx"
     export NODE_TWITTER_SECRET="xxx"
