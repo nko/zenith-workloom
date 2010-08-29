@@ -4,7 +4,7 @@ require.paths.unshift("lib");
 
 require('providers/user-mongodb');
 require('providers/twitter-mongodb');
-require('providers/github');
+require('providers/github-mongodb');
 
 var sys = require('sys'),
   connect = require('connect'),
@@ -19,7 +19,7 @@ var sys = require('sys'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
   authProvider = require('providers/auth-mongodb').AuthProvider,
-  githubProvider = new GitHub();
+  githubProvider = new GithubProvider();
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -134,14 +134,27 @@ app.get('/github', function(req, res) {
   if(!user) {
     res.redirect("/auth");
   }
-  else {  
-    githubProvider.getNkoRepoitoriesCommits(function(error, result) {
+  else {
+    
+    githubProvider.getUserFollowers(user, function(error, result) {
       if(error) {
         logger.error(error);
         res.redirect("/auth?mc=github");
       }
       else {
-        res.send(result);
+        if(!user.github) {
+          user.github = {};
+        }
+        user.github.followers = result;
+        userProvider.save(user, function(error, result) {
+          if(error) {
+            logger.error(error.message);
+            res.redirect("/error");
+          }
+          else {
+            res.send(result);
+          }
+        });
       }
     })
   }
