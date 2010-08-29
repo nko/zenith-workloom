@@ -184,3 +184,7 @@ ul.sprite_icons {display: none;}
 /*=========================*/
 span.copyright {color: #e3e3e3; font-size: 9px;}
 
+/* CLINT */
+.entry .time { width: 5em; text-align: center; }
+.tweet .userGrav { display: inline-block; height: 16px; width: 24px; background: url(../images/tweet.png) no-repeat 50% 50%; }
+.retweet .userGrav { display: inline-block; height: 16px; width: 24px; background: url(../images/retweet.png) no-repeat 50% 50%; }

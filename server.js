@@ -19,7 +19,8 @@ var sys = require('sys'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
   authProvider = require('providers/auth-mongodb').AuthProvider,
-  githubProvider = new GitHub();
+  githubProvider = new GitHub(),
+  df = require('datatypes').datatypeFunctions;
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -203,12 +204,11 @@ function refreshData() {
 
       if(cred) {
         twitterProvider.getWeekTweets(cred, function(error, tweets) {
-          logger.debug("Getting Tweets for user " + cred.name);
 
           if(!user.actions) {
             user.actions = {};
           }
-
+          
           user.actions.tweets = tweets;
           userProvider.save(user, function(error, user) {
             if(i >= result.length) {

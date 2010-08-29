@@ -8,7 +8,9 @@ var config = {
   },
   foursquare : {
     key : process.env['NODE_FOURSQUARE_KEY'],
-    secret : process.env['NODE_FOURSQUARE_SECRET']
+    secret : process.env['NODE_FOURSQUARE_SECRET'],
+    requestUrl : "http://foursquare.com/oauth/request_token",
+    responseUrl : "http://foursquare.com/oauth/access_token"
   },
   facebook : {
     id : process.env['NODE_FACEBOOK_ID'],

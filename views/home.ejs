@@ -31,10 +31,10 @@
                        <div class="day"><%= display + " (" + list.items.length + " events)"%></div>
                        <% for(var a = 0; a < list.items.length; a++) {
                           var item = list.items[a],
-                            date = new Date(parseInt(item.date)),
+                            date = new Date(item.date),
                             hours = date.getHours(),
                             minutes = date.getMinutes(),
-                            display = (hours > 12 ? (hours - 12) : hours) + ":" + (minutes < 10 ? ("0" + minutes) : minutes) + (hours > 11 ? " PM" : " AM");
+                            display = (hours > 12 ? (hours - 12) : ((hours == 0) ? "12" : hours)) + ":" + (minutes < 10 ? ("0" + minutes) : minutes) + (hours > 11 ? " PM" : " AM");
                        %>
                        <div class="entry <%=item.source%> <%=item.type%>">
                            <div class="time"><%= display %></div>
