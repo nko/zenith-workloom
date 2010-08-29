@@ -20,8 +20,8 @@ var sys = require('sys'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
   foursquareProvider = new FoursquareProvider(),
-  authProvider = require('providers/auth-mongodb').AuthProvider,
-  githubProvider = new GithubProvider();
+  authProvider = require('providers/auth-mongodb').AuthProvider;
+//  githubProvider = new GithubProvider();
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -196,7 +196,7 @@ app.get("/logout", function(req, res) {
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
-require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider, githubProvider);
+//require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider, githubProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
