@@ -4,6 +4,7 @@ require.paths.unshift("lib");
 
 require('providers/user-mongodb');
 require('providers/twitter-mongodb');
+require('providers/foursquare-mongodb');
 require('providers/github-mongodb');
 
 var sys = require('sys'),
@@ -18,6 +19,7 @@ var sys = require('sys'),
   auth = require('connect-auth'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
+  foursquareProvider = new FoursquareProvider(),
   authProvider = require('providers/auth-mongodb').AuthProvider,
   githubProvider = new GithubProvider();
 
@@ -193,46 +195,27 @@ app.get("/logout", function(req, res) {
 
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
-require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider, twitterProvider, githubProvider, foursquareProvider);
 require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
 
-var REFRESHING = false;
 function refreshData() {
-  if(REFRESHING) {
-    logger.warn("Attempted to refresh while a refresh was under way... cancelling.");
-    return;
-  }
   logger.debug("Refreshing user data...");
   userProvider.getAllUsers(function(error, result) {
     if(error || !result) {
       logger.error(error.message);
       return;
     }
-    REFRESHING = true;
     for(var i = 0; i < result.length; i++) {
-      var user = result[i], cred = twitterProvider.getTwitterCreds(user);
+      userProvider.refreshUserData(user, function(error, result) {
 
-      if(cred) {
-        twitterProvider.getWeekTweets(cred, function(error, tweets) {
-
-          if(!user.actions) {
-            user.actions = {};
-          }
-          
-          user.actions.tweets = tweets;
-          userProvider.save(user, function(error, user) {
-            if(i >= result.length) {
-              REFRESHING = false;
-            }
-          });
-        });
-      }
+      });
     }
   });
 }
+
 
 setInterval(refreshData, 600000);
 
