@@ -6,6 +6,10 @@ var config = {
     user : process.env['NODE_MONGO_DATABASE_USER'],
     pass : process.env['NODE_MONGO_DATABASE_PASS']
   },
+  foursquare : {
+    key : process.env['NODE_FOURSQUARE_KEY'],
+    secret : process.env['NODE_FOURSQUARE_SECRET']
+  },
   facebook : {
     id : process.env['NODE_FACEBOOK_ID'],
     secret : process.env['NODE_FACEBOOK_SECRET'],
@@ -19,7 +23,10 @@ var config = {
   },
   github : {
     login : process.env['NODE_GITHUB_LOGIN'],
-    token : process.env['NODE_GITHUB_TOKEN']
+    token : process.env['NODE_GITHUB_TOKEN'],
+    appId : process.env['NODE_GITHUB_APP_ID'],
+    appSecret : process.env['NODE_GITHUB_APP_SECRET'],
+    callback : process.env['NODE_GITHUB_APP_CALLBACK']
   },
   port : process.env['NODE_HTTP_PORT'] ? process.env['NODE_HTTP_PORT'] : 3000
 };
