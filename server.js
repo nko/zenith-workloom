@@ -195,8 +195,8 @@ app.get("/logout", function(req, res) {
 
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
-require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider, twitterProvider, githubProvider, foursquareProvider);
-//require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider, githubProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
