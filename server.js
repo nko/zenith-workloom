@@ -180,6 +180,18 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
+app.get("/test", function(req, res) {
+  twitterProvider.test(userProvider, function(error, result) {
+    if (error) {
+      logger.error(error.message);
+      res.redirect("/error");
+    }
+    else {
+      res.send(sys.inspect(result));
+    }
+  });
+});
+
 app.get("/logout", function(req, res) {
   authProvider.logout(req);
   userProvider.logout(req);
