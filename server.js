@@ -23,6 +23,7 @@ log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
 
 var logger = log4js.getLogger("MAIN");
+logger.debug(sys.inspect(config));
 
 process.title = 'zenith-workloom';
 process.addListener('uncaughtException', function (err, stack) {
@@ -179,19 +180,13 @@ app.get('/reload/', function(req, res) {
   })();
 });
 
-app.get("/test", function(req, res) {
-  twitterProvider.test(userProvider, function(error, result) {
-    if (error) {
-      logger.error(error.message);
-      res.redirect("/error");
-    }
-    else {
-      res.send(sys.inspect(result));
-    }
-  });
+app.get("/logout", function(req, res) {
+  authProvider.logout(req);
+  userProvider.logout(req);
+  res.redirect("/");
 });
 
-authProvider.addRoutes(app);
+authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
