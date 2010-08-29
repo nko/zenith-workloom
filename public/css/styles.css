@@ -1,0 +1,186 @@
+/*=========================*/
+/*----- Custom Styles -----*/
+/*=========================*/
+
+/* 
+    Light Blue: #92ddff;
+    Dark Blue: #098fbd;
+    Orange: #f6921c;
+    Dark Green: #335362;
+*/
+
+/*----- General -----*/
+/*=========================*/
+body {background: #098fbd url(../images/overlay.png) repeat-x scroll top left;}
+a, a:visited {text-decoration: none;}
+.overPos, .entry {overflow: hidden; position: relative;}
+.rounded-top {
+    border-width: 1px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+}
+.rounded-bottom {
+    border-width: 1px;
+    -moz-box-shadow: 1px 1px 3px #999 inset;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-left-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+}
+
+/*----- Structure -----*/
+/*=========================*/
+
+div#contentWrapper {margin: 0; padding: 0;}
+    div#mainHome {margin: 0 auto; padding-top: 50px; width: 950px;}
+    div#main {margin: 0 auto; padding: 20px 0; position: relative; width: 950px;}
+        div#header {margin-bottom: 25px; position: relative;}
+        
+/*----- Homepage content -----*/
+/*=========================*/
+div#logoBlock, div#homeContent, div#homeContent .indent {
+     -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    margin: 0 auto;
+}
+    div#logoBlock {
+        background: transparent url(../images/WorkLoom_logo.png) no-repeat scroll 0 0;
+        height: 123px;
+        margin-bottom: 30px;
+        width: 530px;
+    }
+    div#homeContent {background: #fff; border: 2px solid #fff; width: 498px;}
+        div#homeContent .indent {
+            border: 1px solid #7eb6cf;
+            color: #098fbd;
+            font: 24px/32px "Trebuchet MS", Arial, Helvetica, sans-serif;
+            height: 100%;
+            padding: 20px;
+            text-align: center;
+            width: 456px
+        }
+        
+/*----- Header Content -----*/
+/*=========================*/
+a.logoBlock {
+    background: transparent url(../images/WorkLoom-logo-medium.png) no-repeat scroll 0 0;
+    display: block;
+    float: left;
+    height: 105px;
+    margin-left: -11px;
+    position: relative;
+    text-indent: -9999px;
+    width: 450px;
+    z-index: 100;
+}
+    div#tagline {
+        -moz-box-shadow: 1px 1px 3px #555 inset;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        background: #f1f1f1;
+        color: #098fbd;
+        float: left;
+        font-size: 12px;
+        left: 425px;
+        padding: 5px 10px 5px 15px;
+        position: absolute;
+        top: 50px;
+        z-index: 0;
+    }
+    .right1 {float: right;}
+        ul.utility {
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            background: #fff;
+            float: right;
+            margin: 8px 0 25px 0;
+            padding: 5px 10px;
+            position: relative;
+        }
+            ul.utility li {float: left; margin: 0 5px;}
+                ul.utility li a, ul.utility li a:visited {border-bottom: 2px solid #fff; color: #098fbd; text-decoration: none;}
+                    ul.utility li a:hover {border-bottom: 2px solid #f6921c; color: #335362; text-decoration: none;}
+        div#header a.acc {display: block; float: right; margin-right: 5px; text-align: right; }
+            span.numbers, span.subtitle {color: #92ddff; display: block; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; width: 100%;}
+                .acc span.numbers {
+                    color: #92ddff; 
+                    font-size: 32px; 
+                    font-weight: bold; 
+                    line-height: 28px;
+                    text-shadow: 0 1px 0 #292929;
+                }
+                .acc span.subtitle {color: #fff; font-size: 11px; line-height: 12px;}
+
+/*----- Main Content -----*/
+/*=========================*/
+div#mainContent .span-15 {margin-right: 50px;}
+.block {margin-bottom: 25px;}
+.block .heading {
+    background: #92ddff url(../images/gradient.png) repeat-x scroll top left;
+    border-bottom: 1px solid #333;
+    color: #335362;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3px 15px;
+    text-shadow: 0 1px 0 #e3e3e3;
+}
+    .block .contents {
+        background: #fff;
+        color: #098fbd;
+        font-size: 13px;
+        padding: 15px 0;
+    }
+    div#leftCol .block .heading {width: 560px;}
+    div#leftCol .block .contents {width: 590px;}
+    div#rightCol .block .heading {width: 280px;}
+    div#rightCol .block .contents {width: 310px;}
+    
+        /*----- Contents: Entries -----*/
+        /*=========================*/
+        div#leftCol .contents .day {
+            border-bottom: 1px solid #e3e3e3;
+            color: #f6921c; 
+            font-size: 14px; 
+            font-weight: bold; 
+            padding: 0 15px 10px 15px;
+        }
+        div#leftCol .contents .day.next {padding: 10px 15px;}
+        div#leftCol .entry {background: transparent url(../images/gradient-lt.png) repeat-x scroll top left; padding: 6px 20px; position: relative;}
+            .entry .time {color: #555; float: left; margin-right: 10px;}
+            .entry .entryTitle {color: #999; font-size: 12px; font-weight: bold;}
+                .entry .entryTitle a.user {color: #098fbd; font-weight: bold;}
+                    .entry .entryTitle a.user:hover {color: #292929; text-decoration: underline;}
+                .entryTitle a.user1, .entryTitle a.user2, .entryTitle a.user3 {color: #335362; font-size: 90%; padding: 0 3px;}
+                    .entryTitle a.user1:hover, .entryTitle a.user2:hover, .entryTitle a.user3:hover {color: #f6921c;}
+        div#leftCol .contents a.older {
+            -moz-box-shadow: 1px 1px 1px #999 inset;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            background: #e3e3e3;
+            color: #444;
+            display: block;
+            float: left;
+            font-size: 11px;
+            margin: 15px 15px 0;
+            padding: 3px 10px;
+        }
+            div#leftCol .contents a.older:hover {-moz-box-shadow: 1px 1px 3px #999 inset; background: #92ddff; color: #333;}
+            
+
+ul.sprite_icons {display: none;}
+
+
+/*----- Footer Content -----*/
+/*=========================*/
+span.copyright {color: #e3e3e3; font-size: 9px;}
+
