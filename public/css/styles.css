@@ -2,7 +2,7 @@
 /*----- Custom Styles -----*/
 /*=========================*/
 
-/* 
+/*
     Light Blue: #92ddff;
     Dark Blue: #098fbd;
     Orange: #f6921c;
@@ -45,7 +45,7 @@ div#contentWrapper {margin: 0; padding: 0;}
     div#mainHome {margin: 0 auto; padding-top: 50px; width: 950px;}
     div#main {margin: 0 auto; padding: 20px 0; position: relative; width: 950px;}
         div#header {margin-bottom: 25px; position: relative;}
-        
+
 /*----- Homepage content -----*/
 /*=========================*/
 div#logoBlock, div#homeContent, div#homeContent .indent {
@@ -69,7 +69,28 @@ div#logoBlock, div#homeContent, div#homeContent .indent {
             text-align: center;
             width: 456px
         }
-        
+
+/*----- Auth Content -----*/
+/*=========================*/
+div#homeContent .indent p {margin-bottom: 15px;}
+    div#homeContent .indent p.little {
+        color: #555;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 14px;
+        margin: 10px 0;
+    }
+ul.authIcons {
+    height: 63px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 282px;
+}
+    ul.authIcons li {float: left; margin-right: 10px;}
+        ul.authIcons li.last {margin-right: 0;}
+
+
 /*----- Header Content -----*/
 /*=========================*/
 a.logoBlock {
@@ -113,9 +134,9 @@ a.logoBlock {
         div#header a.acc {display: block; float: right; margin-right: 5px; text-align: right; }
             span.numbers, span.subtitle {color: #92ddff; display: block; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; width: 100%;}
                 .acc span.numbers {
-                    color: #92ddff; 
-                    font-size: 32px; 
-                    font-weight: bold; 
+                    color: #92ddff;
+                    font-size: 32px;
+                    font-weight: bold;
                     line-height: 28px;
                     text-shadow: 0 1px 0 #292929;
                 }
@@ -144,20 +165,22 @@ div#mainContent .span-15 {margin-right: 50px;}
     div#leftCol .block .contents {width: 590px;}
     div#rightCol .block .heading {width: 280px;}
     div#rightCol .block .contents {width: 310px;}
-    
+
         /*----- Contents: Entries -----*/
         /*=========================*/
         div#leftCol .contents .day {
             border-bottom: 1px solid #e3e3e3;
-            color: #f6921c; 
-            font-size: 14px; 
-            font-weight: bold; 
-            padding: 0 15px 10px 15px;
+            color: #f6921c;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 15px 10px 15px;
         }
         div#leftCol .contents .day.next {padding: 10px 15px;}
         div#leftCol .entry {background: transparent url(../images/gradient-lt.png) repeat-x scroll top left; padding: 6px 20px; position: relative;}
+            div#leftCol .entry:hover {background-color: #e3e3e3;}
             .entry .time {color: #555; float: left; margin-right: 10px;}
             .entry .entryTitle {color: #999; font-size: 12px; font-weight: bold;}
+            .entry .entryTitle span.profile {margin-top: 3px;}
                 .entry .entryTitle a.user {color: #098fbd; font-weight: bold;}
                     .entry .entryTitle a.user:hover {color: #292929; text-decoration: underline;}
                 .entryTitle a.user1, .entryTitle a.user2, .entryTitle a.user3 {color: #335362; font-size: 90%; padding: 0 3px;}
@@ -175,9 +198,68 @@ div#mainContent .span-15 {margin-right: 50px;}
             padding: 3px 10px;
         }
             div#leftCol .contents a.older:hover {-moz-box-shadow: 1px 1px 3px #999 inset; background: #92ddff; color: #333;}
-            
+
+        /*----- Contents: Sidebar -----*/
+        /*=========================*/
+        div#rightCol .contents ol.links {list-style-position: inside; list-style-type: decimal; margin: 0; padding: 0;}
+            div#rightCol .contents ol.links li {
+                background: transparent url(../images/gradient-lt.png) repeat-x scroll top left;
+                color: #999;
+                float: left;
+                font-size: 12px;
+                padding: 3px 15px 3px 25px;
+                position: relative;
+            }
+                div#rightCol .contents ol.links li:hover {background-color: #f3f3f3;}
+                    div#rightCol .contents ol.links li p {display: inline; float: right; margin: 0; width: 250px;}
+                ol.links li a.user {color: #098fbd;}
+                    ol.links li a.user:hover {color: #292929; text-decoration: underline;}
+                    ol.links li a.user1, ol.links li a.user2, ol.links li a.user3 {color: #335362; font-size: 80%; padding: 0 2px;}
+                        ol.links li a.user1:hover, ol.links li a.user2:hover, ol.links li a.user3:hover {color: #f6921c;}
 
 ul.sprite_icons {display: none;}
+
+
+        /*----- Icons: Sitewide -----*/
+        /*=========================*/
+        .sprite_icons {
+            background: transparent url(../images/sprite_icons.png) no-repeat scroll 0 0;
+            display: block;
+            text-indent: -9999px;
+        }
+            .icon-63 {height: 63px; width: 63px;}
+                .icon-63.fb {background-position: 0 -25px;}
+                .icon-63.tw {background-position: -64px -25px;}
+                .icon-63.fs {background-position: -128px -25px;}
+                .icon-63.gh {background-position: -192px -25px;}
+            .icon-24 {height: 24px; width: 24px;}
+                .clock {background-position: -178px -89px; margin-right: 10px;}
+                .gr {background-position: -2px -89px;}
+                .ls {background-position: -30px -89px;}
+            .icon-12 {height: 12px; width: 12px;}
+                .userGrav {margin: 3px 5px 0 0;}
+                .tweet .userGrav {background-position: -107px -1px;}
+                .facebook .userGrav {background-position: -94px -1px;}
+                .foursquare .userGrav {background-position: -119px -1px;}
+                .github .userGrav {background-position: -131px -1px;}
+                .profile, .settings {margin-right: 5px;}
+                .profile {background-position: -121px -116px;}
+                .settings {background-position: -108px -116px;}
+
+
+        /*----- Social All-Stars -----*/
+        /*=========================*/
+        ul.socialAllStars, ul.events {float: right; margin: 0; padding: 0; position: relative;}
+            ul.socialAllStars li, ul.events li {display: inline;}
+            ul.socialAllStars li a, ul.events li a {float: left; margin-right: 3px;}
+                ul.events li a {border: 1px solid transparent; margin-right: 5px;}
+                    ul.events li a:hover {border: 1px solid #fff;}
+                ul.socialAllStars li a.last, ul.events li a.last {margin-right: 0;}
+                ul.socialAllStars li a.star {background-position: -105px -89px;}
+                ul.socialAllStars li a.fb {background-position: 0 0;}
+                ul.socialAllStars li a.tw {background-position: -23px 0;}
+                ul.socialAllStars li a.fs {background-position: -46px 0;}
+                ul.socialAllStars li a.gh {background-position: -69px 0;}
 
 
 /*----- Footer Content -----*/

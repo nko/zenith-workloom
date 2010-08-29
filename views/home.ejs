@@ -9,8 +9,8 @@
            <div id="tagline">This is the tagline of our site</div>
            <div class="right1 overPos span-6 last">
                <ul class="utility">
-                   <li><a href="/user">Profile</a></li>
-                   <li><a href="#">Settings</a></li>
+                   <li><a href="/user"><span class="sprite_icons icon-12 left profile">&nbsp;</span>Profile</a></li>
+                   <li><a href="#"><span class="sprite_icons icon-12 left settings">&nbsp;</span>Settings</a></li>
                    <li><a href="/logout">Sign Out</a></li>
                </ul>
                <a class="acc" href="#">
@@ -24,12 +24,12 @@
                <div class="block">
                    <div class="heading overPos rounded-top">Latest &amp; Greatest</div>
                    <div class="contents overPos rounded-bottom">
-                    <%
+                   <%
                     for(var i = 0; i < actions.length; i++) {
                       var list = actions[i], date = new Date(list.date),
                         display = days[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate();
                     %>
-                       <div class="day"><%= display + " (" + list.items.length + " events)"%></div>
+                       <div class="day"><span class="sprite_icons icon-24 clock left">&nbsp;</span><%= display + " (" + list.items.length + " events)"%></div>
                        <% for(var a = 0; a < list.items.length; a++) {
                           var item = list.items[a],
                             date = new Date(item.date),
@@ -40,7 +40,7 @@
                        <div class="entry <%=item.source%> <%=item.type%>">
                            <div class="time"><%= display %></div>
                            <!--<div class="entryTitle"><span class="userGrav">&nbsp;</span> <a class="user" href="#">Jacob McDaniel</a> [<a class="user1" href="#">329</a>, <a class="user2" href="#">1,500</a>, <a class="user3" href="#">123</a>]</div>-->
-                           <div class="entryTitle"><span class="userGrav">&nbsp;</span><%= item.desc %></div>
+                           <div class="entryTitle"><span class="sprite_icons icon-12 left <%=item.source%> <%=item.type%> userGrav">&nbsp;</span><%= item.desc %></div>
                        </div>
                     <%  }
                       } %>
@@ -48,43 +48,73 @@
                </div><!-- /Block -->
            </div><!-- /Left Column -->
            <div id="rightCol" class="span-8 last overPos">
+               <%
+               function contains(user, name) {
+                  if(!user || !user.creds) {
+                    return;
+                  }
+
+                  for(var i = 0; i < user.creds.length; i++) {
+                    if(user.creds[i].service == name) {
+                      return true;
+                    }
+                  }
+
+                  return false;
+                }
+               if(user.creds.length < 3) { %>
                <div class="block">
                    <div class="heading overPos rounded-top">
-                       <span class="span-4">All-Stars</span>
-                       <ul class="sprite_icons">
-                           <li><a class="tw span-1" href="#">Twitter</a></li>
-                           <li><a class="fb span-1" href="#">Facebook</a></li>
-                           <li><a class="gt span-1" href="#">GitHub</a></li>
-                           <li><a class="fs span-1" href="#">FourSquare</a></li>
+                       <span class="span-3">Add Services</span>
+                   </div>
+                   <div class="contents overPos rounded-bottom">
+                       <p style="padding: 0 1.5em">Authenticating with another service while signed in will associate your accounts. Give it a try!</p>
+                       <ul class="authIcons">
+                           <li><a class="sprite_icons icon-63 left fb" href="#" title="Sign in with Facebook">Facebook</a></li>
+                           <% if(!contains(user, "twitter")) { %>
+                           <li><a class="sprite_icons icon-63 left tw" href="/auth/twitter" title="Sign in with Twitter">Twitter</a></li>
+                           <% }
+
+                           if(!contains(user,"foursquare")) { %>
+                           <li><a class="sprite_icons icon-63 left fs" href="/auth/foursquare" title="Sign in with FourSquare">FourSquare</a></li>
+                           <% }
+
+                           if(!contains(user, "github")) { %>
+                           <li class="last"><a class="sprite_icons icon-63 left gh" href="/auth/github" title="Sign in with GitHub">GitHub</a></li>
+                           <% } %>
+                       </ul>
+                   </div>
+               </div>
+               <%}%>
+               <div class="block">
+                   <div class="heading overPos rounded-top">
+                       <span class="span-3">All-Stars</span>
+                       <ul class="socialAllStars">
+                           <li><a class="sprite_icons star icon-24" href="#">All-Stars</a></li>
+                           <li><a class="sprite_icons icon-24 fb" href="#">Facebook</a></li>
+                           <li><a class="sprite_icons icon-24 tw" href="#">Twitter</a></li>
+                           <li><a class="sprite_icons icon-24 fs" href="#">FourSquare</a></li>
                        </ul>
                    </div>
                    <div class="contents overPos rounded-bottom">
-                       <ol class="links">
-                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
-                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
-                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
-                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
-                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
-                       </ol>
+                       <p style="padding: .5em 1.5em; text-align: center;">
+                          Shucks, we didn't get a chance to build this, (yet).
+                       </p>
                    </div>
                </div><!-- /All-Stars block -->
 
                <div class="block">
                    <div class="heading overPos rounded-top">
-                       Flux Capacitor
-                       <ul class="sprite_icons">
-                           <li><a class="gr" href="#">Graphs</a></li>
-                           <li><a class="ls" href="#">Links</a></li>
+                       <span class="span-3">Events</span>
+                       <ul class="events">
+                           <li><a class="sprite_icons icon-24 gr" href="#">Graphs</a></li>
+                           <li><a class="sprite_icons icon-24 ls last" href="#">Links</a></li>
                        </ul>
                    </div>
                    <div class="contents overPos rounded-bottom">
-                       <ul class="links">
-                           <li><a href=""></a></li>
-                           <li><a href=""></a></li>
-                           <li><a href=""></a></li>
-                           <li><a href=""></a></li>
-                           <li><a href=""></a></li>
-                       </ul>
+                       <p style="padding: .5em 1.5em; text-align: center;">
+                        This either, (damn).
+                       </p>
                    </div>
                </div><!-- /Graphs/Links block -->
            </div><!-- /Right Column -->
