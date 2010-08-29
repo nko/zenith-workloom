@@ -24,7 +24,8 @@
                <div class="block">
                    <div class="heading overPos rounded-top">Latest &amp; Greatest</div>
                    <div class="contents overPos rounded-bottom">
-                    <% for(var i = 0; i < actions.length; i++) {
+                    <%
+                    for(var i = 0; i < actions.length; i++) {
                       var list = actions[i], date = new Date(list.date),
                         display = days[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate();
                     %>
