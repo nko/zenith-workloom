@@ -1,11 +1,86 @@
-<div class="header">
-    <h1 class="h1 hd"><span class="hd-cap">Dashboard</span></h1>
-</div>
-<div class="main">
-    <div class="content">
-        <h2 class="h2 sub-hd"><span class="sub-hd-cap">Home</span></h2>
-        <p>
-            <%= user %>
-        </p>
-    </div>
+<div id="contentWrapper" class="overPos">
+   <div id="main">
+       <div id="header" class="span-24">
+           <a class="logoBlock" href="index.html">Home</a>
+           <div id="tagline">This is the tagline of our site</div>
+           <div class="right1 overPos span-6 last">
+               <ul class="utility">
+                   <li><a href="#">Profile</a></li>
+                   <li><a href="#">Settings</a></li>
+                   <li><a href="#">Sign Out</a></li>
+               </ul>
+               <a class="acc" href="#">
+                   <span class="numbers">123,456,789</span>
+                   <span class="subtitle">numbers</span>
+               </a>
+           </div>
+       </div><!-- /Header -->
+       <div id="mainContent" class="span-24 overPos">
+           <div id="leftCol" class="span-15 overPos">
+               <div class="block">
+                   <div class="heading overPos rounded-top">Latest &amp; Greatest</div>
+                   <div class="contents overPos rounded-bottom">
+                    <% for(var i = 0; i < actions.length; i++) {
+                      var list = actions[i];
+                    %>
+                       <div class="day"><%= new Date(list.date)%></div>
+                       <% for(var a = 0; a < list.items.length; a++) {
+                          var item = list.items[a];
+                       %>
+                       <div class="entry">
+                           <div class="time"><%= new Date(item.date) %></div>
+                           <!--<div class="entryTitle"><span class="userGrav">&nbsp;</span> <a class="user" href="#">Jacob McDaniel</a> [<a class="user1" href="#">329</a>, <a class="user2" href="#">1,500</a>, <a class="user3" href="#">123</a>]</div>-->
+                           <div class="entryTitle"><span class="userGrav">&nbsp;</span><%= item.desc %></div>
+                       </div>
+                    <%  }
+                      } %>
+                   </div><!-- /Contents -->
+               </div><!-- /Block -->
+           </div><!-- /Left Column -->
+           <div id="rightCol" class="span-8 last overPos">
+               <div class="block">
+                   <div class="heading overPos rounded-top">
+                       <span class="span-4">All-Stars</span>
+                       <ul class="sprite_icons">
+                           <li><a class="tw span-1" href="#">Twitter</a></li>
+                           <li><a class="fb span-1" href="#">Facebook</a></li>
+                           <li><a class="gt span-1" href="#">GitHub</a></li>
+                           <li><a class="fs span-1" href="#">FourSquare</a></li>
+                       </ul>
+                   </div>
+                   <div class="contents overPos rounded-bottom">
+                       <ol class="links">
+                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
+                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
+                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
+                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
+                           <li><span class="userGrav span-1">&nbsp;</span> <a href="#">Jacob McDaniel</a> [<a href="#">329</a>, <a href="#">1,500</a>, <a href="#">123</a>]</li>
+                       </ol>
+                   </div>
+               </div><!-- /All-Stars block -->
+
+               <div class="block">
+                   <div class="heading overPos rounded-top">
+                       Flux Capacitor
+                       <ul class="sprite_icons">
+                           <li><a class="gr" href="#">Graphs</a></li>
+                           <li><a class="ls" href="#">Links</a></li>
+                       </ul>
+                   </div>
+                   <div class="contents overPos rounded-bottom">
+                       <ul class="links">
+                           <li><a href=""></a></li>
+                           <li><a href=""></a></li>
+                           <li><a href=""></a></li>
+                           <li><a href=""></a></li>
+                           <li><a href=""></a></li>
+                       </ul>
+                   </div>
+               </div><!-- /Graphs/Links block -->
+           </div><!-- /Right Column -->
+           </div><!-- /Main Content -->
+       <div id="footer" class="span-24 overPos">
+           <span class="copyright">&copy; 2010 WorkLoom.</span>
+       </div><!-- /Footer -->
+       </div><!-- /Main -->
 </div>

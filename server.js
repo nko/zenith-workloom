@@ -56,8 +56,8 @@ var assets = assetManager({
     , 'path': './public/css/'
     , 'dataType': 'css'
     , 'files': [
-      'reset.css'
-      , 'client.css'
+      //'reset.css'
+      //, 'client.css'
     ]
     , 'preManipulate': {
       /*'MSIE': [
@@ -123,7 +123,8 @@ app.dynamicHelpers({
 
 app.get('/', function(req, res) {
   res.render('index', {
-    locals: {
+    layout : false,
+    locals : {
 
     }
   });
@@ -146,38 +147,6 @@ app.get('/github', function(req, res) {
     })
   }
 });
-
-/*
-  github.getFollowers(function(error, result) {
-    if(error) {
-      logger.error(error);
-    }
-    else 
-    {
-      res.render('github', {
-        locals: {
-          'followers': result,
-          'repo': 'ha'
-        }
-      });
-    }
-  })
-
-  github.getRepo(function(error, result) {
-    if(error) {
-      logger.error(error);
-    }
-    else 
-    {
-      res.render('github', {
-        locals: {
-          'followers': 'ha',
-          'repo': result
-        }
-      });
-    }
-  })
-});*/
 
 app.post('/', function(req, res) {
   console.log(req.body);
