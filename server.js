@@ -194,7 +194,7 @@ app.get("/logout", function(req, res) {
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
-require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider, githubProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
@@ -235,7 +235,7 @@ function refreshData() {
   });
 }
 
-setInterval(refreshData, 600000);
+//setInterval(refreshData, 600000);
 
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
