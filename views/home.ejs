@@ -1,3 +1,7 @@
+<%
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+%>
 <div id="contentWrapper" class="overPos">
    <div id="main">
        <div id="header" class="span-24">
@@ -21,14 +25,19 @@
                    <div class="heading overPos rounded-top">Latest &amp; Greatest</div>
                    <div class="contents overPos rounded-bottom">
                     <% for(var i = 0; i < actions.length; i++) {
-                      var list = actions[i];
+                      var list = actions[i], date = new Date(list.date),
+                        display = days[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate();
                     %>
-                       <div class="day"><%= new Date(list.date)%></div>
+                       <div class="day"><%= display + " (" + list.items.length + " events)"%></div>
                        <% for(var a = 0; a < list.items.length; a++) {
-                          var item = list.items[a];
+                          var item = list.items[a],
+                            date = new Date(parseInt(item.date)),
+                            hours = date.getHours(),
+                            minutes = date.getMinutes(),
+                            display = (hours > 12 ? (hours - 12) : hours) + ":" + (minutes < 10 ? ("0" + minutes) : minutes) + (hours > 11 ? " PM" : " AM");
                        %>
-                       <div class="entry">
-                           <div class="time"><%= new Date(item.date) %></div>
+                       <div class="entry <%=item.source%> <%=item.type%>">
+                           <div class="time"><%= display %></div>
                            <!--<div class="entryTitle"><span class="userGrav">&nbsp;</span> <a class="user" href="#">Jacob McDaniel</a> [<a class="user1" href="#">329</a>, <a class="user2" href="#">1,500</a>, <a class="user3" href="#">123</a>]</div>-->
                            <div class="entryTitle"><span class="userGrav">&nbsp;</span><%= item.desc %></div>
                        </div>
