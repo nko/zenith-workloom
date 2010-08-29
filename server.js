@@ -4,6 +4,7 @@ require.paths.unshift("lib");
 
 require('providers/user-mongodb');
 require('providers/twitter-mongodb');
+require('providers/github-mongodb');
 require('providers/github');
 
 var sys = require('sys'),
@@ -19,8 +20,7 @@ var sys = require('sys'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
   authProvider = require('providers/auth-mongodb').AuthProvider,
-  githubProvider = new GitHub(),
-  df = require('datatypes').datatypeFunctions;
+  githubProvider = new GithubProvider();
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -131,23 +131,36 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/github', function(req, res) {
-  var user = userProvider.getCurrentUser(req), cred;
-  if(!user) {
-    res.redirect("/auth");
-  }
-  else {  
-    githubProvider.getNkoRepoitoriesCommits(function(error, result) {
-      if(error) {
-        logger.error(error);
-        res.redirect("/auth?mc=github");
-      }
-      else {
-        res.send(result);
-      }
-    })
-  }
-});
+// app.get('/github', function(req, res) {
+//   var user = userProvider.getCurrentUser(req), cred;
+//   if(!user) {
+//     res.redirect("/auth");
+//   }
+//   else {
+//     
+//     githubProvider.getUserFollowers(user, function(error, result) {
+//       if(error) {
+//         logger.error(error);
+//         res.redirect("/auth?mc=github");
+//       }
+//       else {
+//         if(!user.github) {
+//           user.github = {};
+//         }
+//         user.github.followers = result;
+//         userProvider.save(user, function(error, result) {
+//           if(error) {
+//             logger.error(error.message);
+//             res.redirect("/error");
+//           }
+//           else {
+//             res.send(result);
+//           }
+//         });
+//       }
+//     })
+//   }
+// });
 
 app.post('/', function(req, res) {
   console.log(req.body);
@@ -182,6 +195,7 @@ app.get("/logout", function(req, res) {
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
