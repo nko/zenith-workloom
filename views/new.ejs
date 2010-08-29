@@ -1,25 +1,33 @@
-<div class="header">
-    <h1 class="h1 hd"><span class="hd-cap">Quotebook</span></h1>
-</div>
-<div class="main">
-    <div class="content">
-        <h2 class="h2 sub-hd"><span class="sub-hd-cap">Create New User</span></h2>
-        <%
-            if(error) {
-        %>
-        <p class="error">
-            <%= error %>
-        </p>
-        <%
-            }
-        %>
-        <form method="POST" action="/user/new/save">
-            <p><label>Username: <input type="text" name="username"/></label></p>
-            <p><input type="hidden" name="tzo" id="tzo"></p>
-            <p><input type="submit" value="Create New User" /></p>
-        </form>
-    </div>
-</div>
+  <div id="contentWrapper" class="overPos">
+	   <div id="mainHome" class="overPos">
+    	   <div id="logoBlock">&nbsp;</div>
+    	   <div id="homeContent">
+    	       <div class="indent">
+                <p>Create a New Username</p>
+                <%
+                    if(error) {
+                %>
+                <p class="error">
+                    <%= error %>
+                </p>
+                <%
+                    }
+                %>
+                <form method="POST" action="/user/new/save">
+                    <p><label>Username: <input type="text" name="username"/></label></p>
+                    <p><input type="hidden" name="tzo" id="tzo"></p>
+                    <p><input type="submit" value="Go, Go, Gadget Username!" /></p>
+                </form>
+
+    	           <p class="little">If you are a new user, enter a unique username. We'll tell you if it's taken.</p>
+    	           <p class="little">
+    	              If you have signed in previously and are seeing this now, you chose to authorize access with
+    	              an account you havent't associated before; you need to <a href="/auth">sign in</a> with that service first.
+    	           </p>
+              </div>
+            </div>
+          </div>
+        </div>
 <script type="text/javascript">
   var tzo = new Date().getTimezoneOffset()/60;
   document.getElementById("tzo").value = tzo;

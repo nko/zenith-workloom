@@ -168,25 +168,27 @@ require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider, twi
 //require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider, githubProvider);
 app.set("home", "/user");
 
-//THIS GOES AWAY
-/*
+//THIS GOES AWAY... or it doesn't?
 function refreshData() {
-  logger.debug("Refreshing user data...");
-  userProvider.getAllUsers(function(error, result) {
-    if(error || !result) {
-      logger.error(error.message);
-      return;
-    }
-    for(var i = 0; i < result.length; i++) {
-      userProvider.refreshUserData(user, function(error, result) {
-
+  try {
+    logger.debug("Refreshing user data...");
+      userProvider.getAllUsers(function(error, result) {
+        if(error || !result) {
+          logger.error(error.message);
+          return;
+        }
+        for(var i = 0; i < result.length; i++) {
+          userProvider.refreshUserData(null, result[i], twitterProvider, null, foursquareProvider, function(error, result) {
+            // Nuthin.
+          });
+        }
       });
     }
-  });
+    catch(e) {
+
+    }
 }
 
-
-setInterval(refreshData, 600000);
-*/
+setInterval(refreshData, 900000);
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
