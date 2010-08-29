@@ -135,7 +135,7 @@ app.get('/github', function(req, res) {
     res.redirect("/auth");
   }
   else {  
-    githubProvider.getUserFollowers(user, function(error, result) {
+    githubProvider.getNkoRepoitoriesCommits(function(error, result) {
       if(error) {
         logger.error(error);
         res.redirect("/auth?mc=github");
