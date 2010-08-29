@@ -5,7 +5,6 @@ require.paths.unshift("lib");
 require('providers/user-mongodb');
 require('providers/twitter-mongodb');
 require('providers/github-mongodb');
-require('providers/github');
 
 var sys = require('sys'),
   connect = require('connect'),
