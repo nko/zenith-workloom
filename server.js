@@ -130,36 +130,36 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/github', function(req, res) {
-  var user = userProvider.getCurrentUser(req), cred;
-  if(!user) {
-    res.redirect("/auth");
-  }
-  else {
-    
-    githubProvider.getUserFollowers(user, function(error, result) {
-      if(error) {
-        logger.error(error);
-        res.redirect("/auth?mc=github");
-      }
-      else {
-        if(!user.github) {
-          user.github = {};
-        }
-        user.github.followers = result;
-        userProvider.save(user, function(error, result) {
-          if(error) {
-            logger.error(error.message);
-            res.redirect("/error");
-          }
-          else {
-            res.send(result);
-          }
-        });
-      }
-    })
-  }
-});
+// app.get('/github', function(req, res) {
+//   var user = userProvider.getCurrentUser(req), cred;
+//   if(!user) {
+//     res.redirect("/auth");
+//   }
+//   else {
+//     
+//     githubProvider.getUserFollowers(user, function(error, result) {
+//       if(error) {
+//         logger.error(error);
+//         res.redirect("/auth?mc=github");
+//       }
+//       else {
+//         if(!user.github) {
+//           user.github = {};
+//         }
+//         user.github.followers = result;
+//         userProvider.save(user, function(error, result) {
+//           if(error) {
+//             logger.error(error.message);
+//             res.redirect("/error");
+//           }
+//           else {
+//             res.send(result);
+//           }
+//         });
+//       }
+//     })
+//   }
+// });
 
 app.post('/', function(req, res) {
   console.log(req.body);
@@ -194,6 +194,7 @@ app.get("/logout", function(req, res) {
 authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
+require('routes/github').GithubRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
 
 //THIS GOES AWAY
