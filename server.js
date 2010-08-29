@@ -4,6 +4,7 @@ require.paths.unshift("lib");
 
 require('providers/user-mongodb');
 require('providers/twitter-mongodb');
+require('providers/github');
 
 var sys = require('sys'),
   connect = require('connect'),
@@ -17,7 +18,8 @@ var sys = require('sys'),
   auth = require('connect-auth'),
   userProvider = new UserProvider(),
   twitterProvider = new TwitterProvider(),
-  authProvider = require('providers/auth-mongodb').AuthProvider;
+  authProvider = require('providers/auth-mongodb').AuthProvider,
+  githubProvider = new GitHub();
 
 log4js.addAppender(log4js.consoleAppender());
 log4js.configure("./config/log4js-config.js");
@@ -128,6 +130,23 @@ app.get('/', function(req, res) {
 });
 
 app.get('/github', function(req, res) {
+  var user = userProvider.getCurrentUser(req), cred;
+  if(!user) {
+    res.redirect("/auth");
+  }
+  else {  
+    githubProvider.getNkoRepoitoriesCommits(function(error, result) {
+      if(error) {
+        logger.error(error);
+        res.redirect("/auth?mc=github");
+      }
+      else {
+        res.send(result);
+      }
+    })
+  }
+});
+
 /*
   github.getFollowers(function(error, result) {
     if(error) {
@@ -143,7 +162,7 @@ app.get('/github', function(req, res) {
       });
     }
   })
-*/
+
   github.getRepo(function(error, result) {
     if(error) {
       logger.error(error);
@@ -158,7 +177,7 @@ app.get('/github', function(req, res) {
       });
     }
   })
-});
+});*/
 
 app.post('/', function(req, res) {
   console.log(req.body);
