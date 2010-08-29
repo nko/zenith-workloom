@@ -252,7 +252,7 @@ function refreshData() {
   });
 }
 
-setInterval(refreshData, 300000);
+//setInterval(refreshData, 300000);
 
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
