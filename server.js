@@ -217,12 +217,11 @@ function refreshData() {
 
       if(cred) {
         twitterProvider.getWeekTweets(cred, function(error, tweets) {
-          logger.debug("Getting Tweets for user " + cred.name);
 
           if(!user.actions) {
             user.actions = {};
           }
-
+          
           user.actions.tweets = tweets;
           userProvider.save(user, function(error, user) {
             if(i >= result.length) {

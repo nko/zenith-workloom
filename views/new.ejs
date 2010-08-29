@@ -15,7 +15,12 @@
         %>
         <form method="POST" action="/user/new/save">
             <p><label>Username: <input type="text" name="username"/></label></p>
+            <p><input type="hidden" name="tzo" id="tzo"></p>
             <p><input type="submit" value="Create New User" /></p>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+  var tzo = new Date().getTimezoneOffset()/60;
+  document.getElementById("tzo").value = tzo;
+</script>

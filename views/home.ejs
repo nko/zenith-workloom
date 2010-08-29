@@ -5,14 +5,13 @@
 <div id="contentWrapper" class="overPos">
    <div id="main">
        <div id="header" class="span-24">
-           <a class="logoBlock" href="index.html">Home</a>
-           <div id="tagline">You know you want to.</div>
+           <a class="logoBlock" href="/">Home</a>
+           <div id="tagline">This is the tagline of our site</div>
            <div class="right1 overPos span-6 last">
                <ul class="utility">
-                   <li><a href="/github">Github</a></li>
-                   <li><a href="#">Profile</a></li>
+                   <li><a href="/user">Profile</a></li>
                    <li><a href="#">Settings</a></li>
-                   <li><a href="#">Sign Out</a></li>
+                   <li><a href="/logout">Sign Out</a></li>
                </ul>
                <a class="acc" href="#">
                    <span class="numbers">123,456,789</span>
@@ -25,17 +24,18 @@
                <div class="block">
                    <div class="heading overPos rounded-top">Latest &amp; Greatest</div>
                    <div class="contents overPos rounded-bottom">
-                    <% for(var i = 0; i < actions.length; i++) {
+                    <%
+                    for(var i = 0; i < actions.length; i++) {
                       var list = actions[i], date = new Date(list.date),
                         display = days[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate();
                     %>
                        <div class="day"><%= display + " (" + list.items.length + " events)"%></div>
                        <% for(var a = 0; a < list.items.length; a++) {
                           var item = list.items[a],
-                            date = new Date(parseInt(item.date)),
+                            date = new Date(item.date),
                             hours = date.getHours(),
                             minutes = date.getMinutes(),
-                            display = (hours > 12 ? (hours - 12) : hours) + ":" + (minutes < 10 ? ("0" + minutes) : minutes) + (hours > 11 ? " PM" : " AM");
+                            display = (hours > 12 ? (hours - 12) : ((hours == 0) ? "12" : hours)) + ":" + (minutes < 10 ? ("0" + minutes) : minutes) + (hours > 11 ? " PM" : " AM");
                        %>
                        <div class="entry <%=item.source%> <%=item.type%>">
                            <div class="time"><%= display %></div>
