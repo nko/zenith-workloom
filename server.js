@@ -181,15 +181,7 @@ app.get('/reload/', function(req, res) {
 });
 
 app.get("/test", function(req, res) {
-  twitterProvider.test(userProvider, function(error, result) {
-    if (error) {
-      logger.error(error.message);
-      res.redirect("/error");
-    }
-    else {
-      res.send(sys.inspect(result));
-    }
-  });
+  refreshData();
 });
 
 app.get("/logout", function(req, res) {
@@ -202,6 +194,46 @@ authProvider.addRoutes(app, userProvider);
 require('routes/auth').AuthRoutes.addRoutes(app, authProvider);
 require('routes/user').UserRoutes.addRoutes(app, authProvider, userProvider);
 app.set("home", "/user");
+
+//THIS GOES AWAY
+
+var REFRESHING = false;
+function refreshData() {
+  if(REFRESHING) {
+    logger.warn("Attempted to refresh while a refresh was under way... cancelling.");
+    return;
+  }
+  logger.debug("Refreshing user data...");
+  userProvider.getAllUsers(function(error, result) {
+    if(error || !result) {
+      logger.error(error.message);
+      return;
+    }
+    REFRESHING = true;
+    for(var i = 0; i < result.length; i++) {
+      var user = result[i], cred = twitterProvider.getTwitterCreds(user);
+
+      if(cred) {
+        twitterProvider.getWeekTweets(cred, function(error, tweets) {
+          logger.debug("Getting Tweets for user " + cred.name);
+
+          if(!user.actions) {
+            user.actions = {};
+          }
+
+          user.actions.tweets = tweets;
+          userProvider.save(user, function(error, user) {
+            if(i >= result.length) {
+              REFRESHING = false;
+            }
+          });
+        });
+      }
+    }
+  });
+}
+
+setInterval(refreshData, 300000);
 
 app.listen(config.port, '0.0.0.0');
 logger.info("Server started on port " + config.port + "...");
